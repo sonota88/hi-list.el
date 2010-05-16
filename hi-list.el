@@ -31,9 +31,6 @@
 ;; (define-key hi-list:map
 ;;   (kbd "M-w") (lambda () (interactive)
 ;;                 (apply-to-highlighted 'kill-ring-save)))
-;; (define-key hi-list:map
-;;   (kbd "C-M-\\") (lambda () (interactive)
-;;                    (apply-to-highlighted 'indent-region)))
 
 ;;; Usage:
 
