@@ -126,13 +126,48 @@
             (overlay-put hi-list:overlay
                          'font-lock-face 'hi-list-face))))))
 
+;; @return nil backward-up-list に失敗した場合
+(defun hi-list:beg ()
+  (save-excursion
+    (ignore-errors
+      (search-string-beginning-backward)
+      (backward-up-list)
+      (point))))
+
+;; @return nil backward-up-list または forward-sexp に失敗した場合
+(defun hi-list:end ()
+  (save-excursion
+    (ignore-errors
+      (search-string-beginning-backward)    
+      (backward-up-list)
+      (forward-sexp)
+      (point))))
+
+(defun hi-list-v2 ()
+  "Highlight current list."
+  (when hi-list:overlay
+      (delete-overlay hi-list:overlay))
+  (save-excursion
+    (let ((beg (hi-list:beg))
+          (end (hi-list:end)))
+      (if (and beg
+               end
+               (< (- end beg) hi-list:limit-chars))
+          (progn
+            (setq hi-list:overlay
+                  (make-overlay beg (point)))
+            (overlay-put hi-list:overlay
+                         'font-lock-face 'hi-list-face))))))
+
 (defun hi-list:interval-run ()
   "Run by timer."
   (if hi-list-mode
       (if mark-active
           (hi-list:delete-overlay)
-        (ignore-errors
-          (hi-list)))
+        ;; (ignore-errors
+        ;;   (hi-list))
+        (hi-list-v2)
+        )
     (hi-list-mode-stop)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
