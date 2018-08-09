@@ -128,7 +128,8 @@
   (if hi-list-mode
       (if mark-active
           (delete-overlay hi-list:overlay)
-        (hi-list))
+        (ignore-errors
+          (hi-list)))
     (hi-list-mode-stop)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
