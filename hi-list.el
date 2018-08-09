@@ -106,7 +106,7 @@
 
 (defun hi-list ()
   "Highlight current list."
-  (if hi-list:overlay
+  (when hi-list:overlay
       (delete-overlay hi-list:overlay))
   (save-excursion
     (let ((beg nil))
