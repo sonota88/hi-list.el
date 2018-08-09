@@ -126,7 +126,9 @@
 (defun hi-list:interval-run ()
   "Run by timer."
   (if hi-list-mode
-      (hi-list)
+      (if mark-active
+          (delete-overlay hi-list:overlay)
+        (hi-list))
     (hi-list-mode-stop)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
