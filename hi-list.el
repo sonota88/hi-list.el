@@ -147,7 +147,7 @@
   "Highlight current list."
   (when hi-list:overlay
       (delete-overlay hi-list:overlay))
-  (save-excursion
+  ;; (save-excursion
     (let ((beg (hi-list:beg))
           (end (hi-list:end)))
       (if (and beg
@@ -157,7 +157,9 @@
             (setq hi-list:overlay
                   (make-overlay beg (point)))
             (overlay-put hi-list:overlay
-                         'font-lock-face 'hi-list-face))))))
+                         'font-lock-face 'hi-list-face))))
+    ;; )
+  )
 
 (defun hi-list:interval-run ()
   "Run by timer."
