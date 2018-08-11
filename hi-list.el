@@ -145,8 +145,7 @@
 
 (defun hi-list-v2 ()
   "Highlight current list."
-  (when hi-list:overlay
-      (delete-overlay hi-list:overlay))
+  (hi-list:delete-overlay)
   ;; (save-excursion
     (let ((beg (hi-list:beg))
           (end (hi-list:end)))
