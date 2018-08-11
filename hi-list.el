@@ -104,10 +104,13 @@
                      (overlay-end   hi-list:overlay))))))
         (t nil)))
 
+(defun hi-list:delete-overlay ()
+  (when hi-list:overlay
+    (delete-overlay hi-list:overlay)))
+
 (defun hi-list ()
   "Highlight current list."
-  (when hi-list:overlay
-      (delete-overlay hi-list:overlay))
+  (hi-list:delete-overlay)
   (save-excursion
     (let ((beg nil))
       (search-string-beginning-backward)
@@ -127,7 +130,7 @@
   "Run by timer."
   (if hi-list-mode
       (if mark-active
-          (delete-overlay hi-list:overlay)
+          (hi-list:delete-overlay)
         (ignore-errors
           (hi-list)))
     (hi-list-mode-stop)))
@@ -146,8 +149,7 @@
 
 (defun hi-list-mode-stop ()
   "Invoked when hi-list-mode is turned off."
-  (if hi-list:overlay
-      (delete-overlay hi-list:overlay))
+  (hi-list:delete-overlay)
   (if (hi-list:disable-in-all-buffers-p)
       (progn
         (cancel-timer hi-list:timer)
