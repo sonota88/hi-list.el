@@ -126,7 +126,7 @@
             (overlay-put hi-list:overlay
                          'font-lock-face 'hi-list-face))))))
 
-;; @return nil backward-up-list に失敗した場合
+;; @return backward-up-list に失敗した場合 nil
 (defun hi-list:beg ()
   (save-excursion
     (ignore-errors
@@ -134,7 +134,7 @@
       (backward-up-list)
       (point))))
 
-;; @return nil backward-up-list または forward-sexp に失敗した場合
+;; @return backward-up-list または forward-sexp に失敗した場合 nil
 (defun hi-list:end ()
   (save-excursion
     (ignore-errors
