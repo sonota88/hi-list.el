@@ -155,7 +155,7 @@
                (< (- end beg) hi-list:limit-chars))
           (progn
             (setq hi-list:overlay
-                  (make-overlay beg (point)))
+                  (make-overlay beg end))
             (overlay-put hi-list:overlay
                          'font-lock-face 'hi-list-face))))
     ;; )
